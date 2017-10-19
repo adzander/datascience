@@ -1,0 +1,1 @@
+##Analysis intended to describe the relationship between GC content and length of ears.
