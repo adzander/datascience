@@ -8,7 +8,7 @@ gc_content <- function(sequence){
   sequence <- str_to_lower(sequence)
   gs <- str_count(sequence, "g")
   cs <- str_count(sequence, "c")
-  gc_content <- (Gs + Cs) / str_length(sequence) * 100 
+  gc_content <- (gs + cs) / str_length(sequence) * 100 
   return(gc_content)
 }
 
@@ -17,3 +17,10 @@ get_size_class <- function(ear_length){
    ear_lengths <- ifelse(ear_length > 10, "large", "small")
    return(ear_lengths)
 }
+
+ear_data <- data.frame(id=houseelf.data$id, sizeclass= NA, gccontent= NA)
+
+ear_data$gccontent <- sapply(houseelf.data$dnaseq, gc_content)
+ear_data$sizeclass <- sapply(houseelf.data$earlength, get_size_class)
+
+write.csv(ear_data, 'ear_data.csv')
